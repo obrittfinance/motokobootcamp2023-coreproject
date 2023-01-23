@@ -20,11 +20,11 @@ export type HeaderField = [string, string];
 export interface HttpRequest {
   'url' : string,
   'method' : string,
-  'body' : Uint8Array,
+  'body' : Array<number>,
   'headers' : Array<HeaderField>,
 }
 export interface HttpResponse {
-  'body' : Uint8Array,
+  'body' : Array<number>,
   'headers' : Array<HeaderField>,
   'streaming_strategy' : [] | [StreamingStrategy],
   'status_code' : number,
@@ -32,17 +32,17 @@ export interface HttpResponse {
 export type Key = string;
 export interface SetAssetContentArguments {
   'key' : Key,
-  'sha256' : [] | [Uint8Array],
+  'sha256' : [] | [Array<number>],
   'chunk_ids' : Array<ChunkId>,
   'content_encoding' : string,
 }
 export interface StreamingCallbackHttpResponse {
   'token' : [] | [StreamingCallbackToken],
-  'body' : Uint8Array,
+  'body' : Array<number>,
 }
 export interface StreamingCallbackToken {
   'key' : Key,
-  'sha256' : [] | [Uint8Array],
+  'sha256' : [] | [Array<number>],
   'index' : bigint,
   'content_encoding' : string,
 }
@@ -59,10 +59,6 @@ export interface UnsetAssetContentArguments {
 }
 export interface _SERVICE {
   'authorize' : ActorMethod<[Principal], undefined>,
-  'certified_tree' : ActorMethod<
-    [{}],
-    { 'certificate' : Uint8Array, 'tree' : Uint8Array },
-  >,
   'clear' : ActorMethod<[ClearArguments], undefined>,
   'commit_batch' : ActorMethod<
     [{ 'batch_id' : BatchId, 'operations' : Array<BatchOperationKind> }],
@@ -71,15 +67,15 @@ export interface _SERVICE {
   'create_asset' : ActorMethod<[CreateAssetArguments], undefined>,
   'create_batch' : ActorMethod<[{}], { 'batch_id' : BatchId }>,
   'create_chunk' : ActorMethod<
-    [{ 'content' : Uint8Array, 'batch_id' : BatchId }],
+    [{ 'content' : Array<number>, 'batch_id' : BatchId }],
     { 'chunk_id' : ChunkId },
   >,
   'delete_asset' : ActorMethod<[DeleteAssetArguments], undefined>,
   'get' : ActorMethod<
     [{ 'key' : Key, 'accept_encodings' : Array<string> }],
     {
-      'content' : Uint8Array,
-      'sha256' : [] | [Uint8Array],
+      'content' : Array<number>,
+      'sha256' : [] | [Array<number>],
       'content_type' : string,
       'content_encoding' : string,
       'total_length' : bigint,
@@ -89,12 +85,12 @@ export interface _SERVICE {
     [
       {
         'key' : Key,
-        'sha256' : [] | [Uint8Array],
+        'sha256' : [] | [Array<number>],
         'index' : bigint,
         'content_encoding' : string,
       },
     ],
-    { 'content' : Uint8Array },
+    { 'content' : Array<number> },
   >,
   'http_request' : ActorMethod<[HttpRequest], HttpResponse>,
   'http_request_streaming_callback' : ActorMethod<
@@ -109,7 +105,7 @@ export interface _SERVICE {
         'encodings' : Array<
           {
             'modified' : Time,
-            'sha256' : [] | [Uint8Array],
+            'sha256' : [] | [Array<number>],
             'length' : bigint,
             'content_encoding' : string,
           }
@@ -123,8 +119,8 @@ export interface _SERVICE {
     [
       {
         'key' : Key,
-        'content' : Uint8Array,
-        'sha256' : [] | [Uint8Array],
+        'content' : Array<number>,
+        'sha256' : [] | [Array<number>],
         'content_type' : string,
         'content_encoding' : string,
       },

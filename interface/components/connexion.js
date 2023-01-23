@@ -4,7 +4,7 @@ import { idlFactory as idlFactoryDAO } from "../../src/declarations/dao/dao.did.
 import { HttpAgent, Actor } from "@dfinity/agent"
 
 //TODO : Add your mainnet id whenever you have deployed on the IC
-const daoCanisterId = 
+const daoCanisterId = "374nm-gaaaa-aaaam-abcfq-cai"
   process.env.NODE_ENV === "development" ? "ryjl3-tyaaa-aaaaa-aaaba-cai" : "rvpd5-iqaaa-aaaaj-qazsa-cai"
 
 // See https://docs.plugwallet.ooo/ for more informations
@@ -15,7 +15,10 @@ export async function plugConnection() {
   if (!result) {
     throw new Error("User denied the connection")
   }
+
+  
   const p = await window.ic.plug.agent.getPrincipal()
+    console.log(`the users name is ${p}`)
 
   const agent = new HttpAgent({
     host: process.env.NODE_ENV === "development" ? "http://localhost:8000" : "https://ic0.app",

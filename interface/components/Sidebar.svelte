@@ -19,6 +19,10 @@
   const handleHome = () => {
     $view.current = $view.home
   }
+
+  const handleTest = () => {
+    $view.current = $view.test
+  }
 </script>
 
 <nav class:expanded={isExpanded} on:mouseover={() => mouseover()}>
@@ -28,6 +32,7 @@
       <li on:click={() => handleView()}>🚀 View</li>
       <li on:click={() => handleCreate()}>⭐️ Create</li>
       <li on:click={() => handleVote()}>🗑 Vote</li>
+      <li on:click={() => handleTest()}>🧪 Test</li>
     {/if}
   </ul>
 </nav>

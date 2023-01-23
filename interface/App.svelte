@@ -7,6 +7,17 @@
   import Vote from "./components/Vote.svelte"
   import View from "./components/View.svelte"
   import Create from "./components/Create.svelte"
+  import Test from "./components/Test.svelte"
+    import { plugConnection } from "./components/connexion"
+
+
+  let principalId = ""
+
+  async function hConnectPlug() {
+    principalId = await plugConnection()
+  }
+
+
 </script>
 
 <div class="App">
@@ -21,6 +32,8 @@
       <Vote />
     {:else if $view.current === $view.create}
       <Create />
+      {:else if $view.current === $view.test}
+      <Test />
     {/if}
     <div class="styling" />
   </div>
